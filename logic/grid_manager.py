@@ -27,3 +27,4 @@ def print_debug_grid(grid):
                 line += " O "  # 블록 있는 곳
         print(line)
     print("--- DEBUG BOARD END ---")
+    
