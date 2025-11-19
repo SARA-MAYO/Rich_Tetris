@@ -17,6 +17,8 @@ def check_collision(grid, piece_coords, piece_x, piece_y, dx=0, dy=0)
         # 예외 처리 1: 기본 블록 영역 벗어남
         if nx < 0 or nx > BOARD_WIDTH or nx >= BOARD_HEIGHT:
             return True
-
+        
+        if ny >= 0 and grid[ny][nx] is not None:
+            return True
 
     return False
