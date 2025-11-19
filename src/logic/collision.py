@@ -1,0 +1,1 @@
+from src.config.settings import BOARD_HEIGHT, BOARD_WIDTH
