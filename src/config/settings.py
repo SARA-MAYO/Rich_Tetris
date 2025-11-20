@@ -1,5 +1,36 @@
-# src/config/settings.py
+# 기본 설정
+BOARD_WIDTH = 10   # 테트리스 보드 가로 10칸
+BOARD_HEIGHT = 20  # 테트리스 보드 세로 20칸
+DEFALT_SPEED = 0.5  # 블록은 0.5초마다 1칸씩 내려감
 
-# ▼ 이 부분이 해당됩니다
-BOARD_WIDTH = 10
-BOARD_HEIGHT = 20
+# 테트로미노 데이터(정식 7종)
+TETROMINOS = {
+    "I": {
+        "shape": [(0, 1), (1, 1), (2, 1), (3, 1)],
+        "color": "cyan",
+    },
+    "J": {
+        "shape": [(0, 0), (0, 1), (1, 1), (2, 1)],
+        "color": "blue",
+    },
+    "L": {
+        "shape": [(2, 0), (0, 1), (1, 1), (2, 1)],
+        "color": "orange1",
+    },
+    "O": {
+        "shape": [(1, 0), (2, 0), (1, 1), (2, 1)],
+        "color": "yellow",
+    },
+    "S": {
+        "shape": [(1, 0), (2, 0), (0, 1), (1, 1)],
+        "color": "red",
+    },
+    "T": {
+        "shape": [(1, 0), (0, 1), (1, 1), (2, 1)],
+        "color": "magenta",
+    },
+    "Z": {
+        "shape": [(0, 0), (1, 0), (1, 1), (2, 1)],
+        "color": "green",
+    },
+}
