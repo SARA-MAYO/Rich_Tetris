@@ -9,3 +9,20 @@ def calculate_rotation(shape_name, current_coords):
     if shape_name == "O":
         return current_coords  
 
+    # 기준점(pivot) 계산
+    pivot = current_coords[2]
+    px, py = pivot
+
+    # 회전 후 새로운 배열
+    # - rx, ry(블록의 pivot 기준 x, y 방향으로 떨아진 거리)
+    # - nx, ny(회전 후 x, y 좌표)
+    new_coords = []
+    for x, y in current_coords:
+        # 회전 공식: (x, y) -> (-y, x)
+        # 피벗 기준 상대 좌표로 변환 -> 회전 -> 다시 절대 좌표로 복구
+        rx, ry = x - px, y - py
+        nx, ny = -ry + px, rx + py
+        new_coords.append((int(nx), int(ny)))
+
+    return new_coords
+
