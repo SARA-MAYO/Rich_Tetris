@@ -1,6 +1,6 @@
 from src.config.settings import BOARD_HEIGHT, BOARD_WIDTH
 
-def check_collision(grid, piece_coords, piece_x, piece_y, dx=0, dy=0)
+def check_collision(grid, piece_coords, piece_x, piece_y, dx=0, dy=0):
     """
     ✅ 목적: 이동할 위치(dx, dy)에 장애물이 있는지 확인함
     - grid: 2차원 배열
