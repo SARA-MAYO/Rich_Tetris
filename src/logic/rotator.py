@@ -1,28 +1,29 @@
-"""
-테트로미노의 현재 좌표를 기반으로 시계방향 90도 회전된 새 좌표를 계산해서 반환
-- 회전 기능 구현을 위해 회전 계산만 담당하는 순수 로직 제공
-"""
-
 def calculate_rotation(shape_name, current_coords):
-
-    # 예외 처리 '0' 블록은 회전안 함(정사각형 형태)
+    """
+    현재 좌표를 받아 시계방향(90도) 회전된 새 좌표 반환
+    (x, y) -> (-y, x) 공식을 사용하여 원점 기준 회전
+    """
+    # 정사각형(O) 블록은 회전해도 모양이 같으므로 그대로 반환
     if shape_name == "O":
-        return current_coords  
+        return current_coords
 
-    # 기준점(pivot) 계산
-    pivot = current_coords[2]
+    # 회전 축(Pivot) 결정
+    # 블록 조각 중 하나를 중심으로 잡아야 제자리에서 돕니다.
+    # 리스트의 중간 지점(index 1 또는 2)을 기준으로 잡습니다.
+    pivot = current_coords[1] if len(current_coords) > 1 else (0, 0)
     px, py = pivot
-
-    # 회전 후 새로운 배열
-    # - rx, ry(블록의 pivot 기준 x, y 방향으로 떨아진 거리)
-    # - nx, ny(회전 후 x, y 좌표)
+    
     new_coords = []
     for x, y in current_coords:
-        # 회전 공식: (x, y) -> (-y, x)
-        # 피벗 기준 상대 좌표로 변환 -> 회전 -> 다시 절대 좌표로 복구
+        # 1. 중심점 기준으로 원점으로 이동 (상대 좌표 계산)
         rx, ry = x - px, y - py
-        nx, ny = -ry + px, rx + py
-        new_coords.append((int(nx), int(ny)))  # 정수로 변환, 튜플로 만듦, 리스트에 넣음
-
+        
+        # 2. 90도 회전 공식 적용: (x, y) -> (-y, x)
+        # 화면 좌표계(Y가 아래로 증가) 특성상 이 공식이 시계방향입니다.
+        rotated_x, rotated_y = -ry, rx
+        
+        # 3. 다시 원래 위치(절대 좌표)로 복구
+        nx, ny = rotated_x + px, rotated_y + py
+        new_coords.append((int(nx), int(ny)))
+        
     return new_coords
-

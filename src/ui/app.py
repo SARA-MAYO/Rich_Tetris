@@ -4,7 +4,7 @@ from textual.binding import Binding
 
 # 모듈화된 기능들 import
 from src.config.settings import DEFAULT_SPEED
-from src.logic import grid_manager, spawner, collision, rotator, line_manager
+from src.logic import collision, grid_manager, spawner, rotator, line_manager
 from src.state.score import ScoreManager
 from src.ui.widgets import BoardWidget, InfoWidget
 from src.ui.screens import PauseScreen, GameOverScreen
@@ -108,6 +108,20 @@ class TetrisApp(App):
                                              self.current_piece["x"], self.current_piece["y"]):
                 self.current_piece["coords"] = new_coords
                 self.refresh_view()
+            else:
+                # Wall Kick: 회전이 불가능할 때 좌우로 1칸씩 이동해서 회전 시도
+                # 먼저 왼쪽으로 이동 시도
+                if not collision.check_collision(self.grid, new_coords, 
+                                                 self.current_piece["x"] - 1, self.current_piece["y"]):
+                    self.current_piece["coords"] = new_coords
+                    self.current_piece["x"] -= 1
+                    self.refresh_view()
+                # 왼쪽 실패 시 오른쪽으로 이동 시도
+                elif not collision.check_collision(self.grid, new_coords, 
+                                                   self.current_piece["x"] + 1, self.current_piece["y"]):
+                    self.current_piece["coords"] = new_coords
+                    self.current_piece["x"] += 1
+                    self.refresh_view()
 
     def action_toggle_pause(self):
         self.is_paused = not self.is_paused
