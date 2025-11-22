@@ -21,8 +21,9 @@ def check_collision(grid, piece_coords, piece_x, piece_y, dx=0, dy=0):
         if ny < 0 or ny >= BOARD_HEIGHT:
             return True
 
-        # 2. 기존 블록 충돌 검사
-        if ny >= 0 and grid[ny][nx] is not None:
-            return True
+        # 2. 기존 블록 충돌 검사 (경계 내부인지 확인 후 체크)
+        if 0 <= ny < BOARD_HEIGHT and 0 <= nx < BOARD_WIDTH:
+            if grid[ny][nx] is not None:
+                return True
 
     return False

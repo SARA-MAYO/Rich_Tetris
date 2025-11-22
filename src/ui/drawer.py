@@ -25,7 +25,7 @@ def draw_grid_panel(grid, current_piece=None):
             if cell:
                 text.append("  ", style=f"on {cell}") # 블록 (배경색)
             else:
-                text.append(" . ", style="dim grey")  # 빈 공간
+                text.append(" .", style="dim grey")  # 빈 공간
         text.append("\n") # 줄바꿈
         
     return Panel(Align.center(text), title="TETRIS", border_style="blue")
