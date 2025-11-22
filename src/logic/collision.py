@@ -11,13 +11,17 @@ def check_collision(grid, piece_coords, piece_x, piece_y, dx=0, dy=0):
     ✅ 계산 로직: 현재 위치 + 모양 내부 좌표 + 이동하려는 변화값 = 새로운 x 또는 y좌표 산출
     """
     for x, y in piece_coords:   # 각각 칸 좌표에 대해 충돌 여부 체크
-        nx = piece_x + x + dx  
+        nx = piece_x + x + dx
         ny = piece_y + y + dy
 
-        # 예외 처리 1: 기본 블록 영역 벗어남
-        if nx < 0 or nx > BOARD_WIDTH or nx >= BOARD_HEIGHT:
+        # 1. 보드 경계 검사
+        if nx < 0 or nx >= BOARD_WIDTH:
             return True
-        
+
+        if ny < 0 or ny >= BOARD_HEIGHT:
+            return True
+
+        # 2. 기존 블록 충돌 검사
         if ny >= 0 and grid[ny][nx] is not None:
             return True
 
