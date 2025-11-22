@@ -22,7 +22,7 @@ def calculate_rotation(shape_name, current_coords):
         # 피벗 기준 상대 좌표로 변환 -> 회전 -> 다시 절대 좌표로 복구
         rx, ry = x - px, y - py
         nx, ny = -ry + px, rx + py
-        new_coords.append((int(nx), int(ny)))
+        new_coords.append((int(nx), int(ny)))  # 정수로 변환, 튜플로 만듦, 리스트에 넣음
 
     return new_coords
 
